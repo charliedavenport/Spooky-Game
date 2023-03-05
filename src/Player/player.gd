@@ -11,6 +11,7 @@ const torch_scene = preload("res://src/Torch/torch.tscn")
 @onready var anim = $AnimationPlayer
 @onready var hand = $Hand
 @onready var pickup_area = $PickUpArea
+@onready var torch = $Hand/Torch
 
 var has_torch : bool
 var available_torch
@@ -45,7 +46,11 @@ func _physics_process(delta):
 	move_and_slide()
 	
 	if velocity.length() > 0.5:
-		flip_self(velocity.x < 0)
+		if (velocity.x < -0.1):
+			flip_self(true)
+		elif (velocity.x > 0.1):
+			flip_self(false)
+		
 		
 		if not anim.current_animation == "walk" or anim.current_animation == "walk_torch":
 			anim.play("walk_torch" if has_torch else "walk")
@@ -100,13 +105,15 @@ func drop_torch() -> void:
 	
 	var tween = get_tree().create_tween()
 	var target_loc = hand.global_position + Vector2(0, 33)
-	tween.tween_property(dropped_torch, "global_position", target_loc, 0.2)
+	tween.tween_property(dropped_torch, "global_position", target_loc, 0.5)\
+		.set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
 	tween.parallel().tween_property(dropped_torch.get_node("Sprite2D"), "rotation", TAU/4.0, 0.2)
 	tween.tween_property(dropped_torch, "can_be_picked_up", true, 0.0)
 
 
 func set_has_torch(value : bool) -> void:
 	has_torch = value
+	torch.visible = value
 	if anim.is_playing():
 		var pos = anim.current_animation_position
 		if anim.current_animation == "walk":
@@ -118,6 +125,9 @@ func set_has_torch(value : bool) -> void:
 
 func on_pickup_area_exited(area) -> void:
 	if has_torch or not available_torch:
+		return
+	
+	if not area.get_parent().can_be_picked_up:
 		return
 	
 	available_torch.hide_label()

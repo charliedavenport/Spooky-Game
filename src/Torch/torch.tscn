@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/Torch/torch.gd" id="1_rons0"]
 [ext_resource type="Texture2D" uid="uid://d1i0n6jrsg478" path="res://sprites/torch.png" id="2_iesrp"]
 [ext_resource type="Texture2D" uid="uid://3bco4if2l2cc" path="res://sprites/fire_spritesheet_color.png" id="3_ds3eu"]
-[ext_resource type="Texture2D" uid="uid://84hk2w1ori6w" path="res://sprites/light.png" id="4_4n27w"]
+[ext_resource type="Texture2D" uid="uid://xgto5bed82s3" path="res://src/Torch/torch_light_gradient.tres" id="4_d3i7m"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w5hwk"]
 light_mode = 1
@@ -84,17 +84,17 @@ libraries = {
 "": SubResource("AnimationLibrary_577h7")
 }
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="TorchLight" type="PointLight2D" parent="."]
 z_index = 1
 z_as_relative = false
 y_sort_enabled = true
 position = Vector2(0, -6)
 color = Color(1, 0.564706, 0.0901961, 1)
-energy = 1.5
 shadow_enabled = true
 shadow_color = Color(0, 0, 0, 1)
 shadow_filter_smooth = 8.0
-texture = ExtResource("4_4n27w")
+texture = ExtResource("4_d3i7m")
+texture_scale = 0.5
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
