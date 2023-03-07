@@ -26,7 +26,7 @@ func _ready():
 	
 	set_has_torch(false)
 	
-	$Camera2D/ColorRect.show()
+	$PlayerCamera.target = self
 
 
 func _physics_process(delta):

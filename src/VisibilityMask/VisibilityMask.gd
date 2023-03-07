@@ -1,4 +1,4 @@
-extends TileMap
+extends ClonableTileMap
 class_name VisibilityMask
 
 const visibility_light_scene = preload("res://src/VisibilityMask/visibility_light.tscn")
