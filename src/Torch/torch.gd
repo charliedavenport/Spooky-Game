@@ -1,8 +1,9 @@
 extends Node2D
 class_name Torch
 
-var can_be_picked_up : bool = true
+@onready var torch_light = $TorchLight
 
+var can_be_picked_up : bool = true
 
 func _process(delta):
 	var flame_sprite = $Sprite2D/Sprite2D

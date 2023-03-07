@@ -1,11 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://c54pvbcbb7wiv"]
+[gd_scene load_steps=6 format=3 uid="uid://c54pvbcbb7wiv"]
 
 [ext_resource type="Script" path="res://src/Enemy/enemy.gd" id="1_m10w3"]
 [ext_resource type="Texture2D" uid="uid://ctfwgx0ts0d6d" path="res://icon.svg" id="2_746aa"]
+[ext_resource type="Shader" path="res://src/Enemy/Enemy.gdshader" id="2_cftsd"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_35q5k"]
 radius = 6.99999
 height = 34.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_afybn"]
+shader = ExtResource("2_cftsd")
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 0
@@ -19,6 +23,7 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_35q5k")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_afybn")
 position = Vector2(1.19209e-07, -22)
 scale = Vector2(0.343129, 0.343129)
 texture = ExtResource("2_746aa")

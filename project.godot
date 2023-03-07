@@ -61,3 +61,4 @@ pickup={
 2d_physics/layer_1="level"
 2d_physics/layer_2="player"
 2d_physics/layer_3="torch"
+2d_physics/layer_4="enemy"

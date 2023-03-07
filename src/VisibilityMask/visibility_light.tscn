@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://w2irwpwovfgo"]
+
+[ext_resource type="Texture2D" uid="uid://xgto5bed82s3" path="res://src/Torch/torch_light_gradient.tres" id="1_jqtjp"]
+[ext_resource type="Script" path="res://src/VisibilityMask/VisibilityLight.gd" id="2_n1cnn"]
+
+[node name="VisibilityLight" type="PointLight2D"]
+energy = 2.0
+blend_mode = 1
+shadow_enabled = true
+texture = ExtResource("1_jqtjp")
+texture_scale = 0.5
+script = ExtResource("2_n1cnn")

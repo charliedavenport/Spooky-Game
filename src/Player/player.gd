@@ -6,6 +6,7 @@ const move_speed = 65.0
 const torch_scene = preload("res://src/Torch/torch.tscn")
 
 @onready var self_light = $PlayerLight
+@onready var torch_light = $Hand/Torch/TorchLight
 @onready var flashlight = $Hand/Flashlight
 @onready var sprite = $Sprite2D
 @onready var anim = $AnimationPlayer
@@ -23,7 +24,7 @@ func _ready():
 	pickup_area.connect("area_entered", on_pickup_area_entered)
 	pickup_area.connect("area_exited", on_pickup_area_exited)
 	
-	has_torch = false
+	set_has_torch(false)
 	
 	$Camera2D/ColorRect.show()
 
@@ -114,6 +115,7 @@ func drop_torch() -> void:
 func set_has_torch(value : bool) -> void:
 	has_torch = value
 	torch.visible = value
+	torch_light.visible = value
 	if anim.is_playing():
 		var pos = anim.current_animation_position
 		if anim.current_animation == "walk":

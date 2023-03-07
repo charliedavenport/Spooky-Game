@@ -1,8 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://caw2ba1o3nlf3"]
+[gd_scene load_steps=18 format=3 uid="uid://caw2ba1o3nlf3"]
 
 [ext_resource type="Script" path="res://src/Player/player.gd" id="1_s23x1"]
 [ext_resource type="Texture2D" uid="uid://bioxyh4bmxacc" path="res://Krita/Spritesheet.png" id="2_ncdi2"]
-[ext_resource type="Texture2D" uid="uid://bxdlwev70hgdp" path="res://sprites/player_light.png" id="3_lijsy"]
 [ext_resource type="Texture2D" uid="uid://3bco4if2l2cc" path="res://sprites/fire_spritesheet_color.png" id="4_esdc1"]
 [ext_resource type="Texture2D" uid="uid://xgto5bed82s3" path="res://src/Torch/torch_light_gradient.tres" id="5_lb4ke"]
 [ext_resource type="Texture2D" uid="uid://divwmgmm6sj22" path="res://sprites/spotlight.png" id="6_v2l8l"]
@@ -218,13 +217,14 @@ libraries = {
 }
 
 [node name="PlayerLight" type="PointLight2D" parent="."]
-position = Vector2(16, -41)
+position = Vector2(0, -25)
+color = Color(0.713726, 0.756863, 0.890196, 1)
 energy = 0.35
 shadow_enabled = true
 shadow_color = Color(0, 0, 0, 1)
 shadow_filter_smooth = 13.3
-texture = ExtResource("3_lijsy")
-texture_scale = 4.25
+texture = ExtResource("5_lb4ke")
+texture_scale = 0.25
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7)
@@ -232,6 +232,7 @@ rotation = 1.57079
 shape = SubResource("CapsuleShape2D_7iwev")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+enabled = false
 zoom = Vector2(2.5, 2.5)
 
 [node name="ColorRect" type="ColorRect" parent="Camera2D"]
@@ -272,6 +273,7 @@ libraries = {
 }
 
 [node name="TorchLight" type="PointLight2D" parent="Hand/Torch"]
+visible = false
 z_index = 1
 z_as_relative = false
 y_sort_enabled = true
