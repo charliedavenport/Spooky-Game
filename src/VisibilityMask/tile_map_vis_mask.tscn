@@ -4067,7 +4067,7 @@ script = ExtResource("4_ga48b")
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 texture_filter = 1
-zoom = Vector2(2.5, 2.5)
+zoom = Vector2(2, 2)
 script = ExtResource("5_wwbav")
 
 [node name="ColorRect" type="ColorRect" parent="PlayerCamera"]

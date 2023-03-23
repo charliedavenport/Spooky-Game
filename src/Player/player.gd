@@ -68,7 +68,8 @@ func flip_self(is_flipped: bool) -> void:
 
 
 func _process(delta):
-	flashlight.look_at(get_global_mouse_position())
+	var mouse_pos = get_viewport().get_final_transform().basis_xform_inv(get_global_mouse_position())
+	flashlight.look_at(mouse_pos)
 
 
 func _input(event):

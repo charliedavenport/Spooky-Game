@@ -1,10 +1,39 @@
-[gd_scene load_steps=68 format=3 uid="uid://dkndvy4y4gs8t"]
+[gd_scene load_steps=77 format=3 uid="uid://dkndvy4y4gs8t"]
 
+[ext_resource type="Shader" path="res://src/Level/scrolling_fog.gdshader" id="1_1ktsl"]
 [ext_resource type="Texture2D" uid="uid://cgluapb6fbut3" path="res://RF_Catacombs_v1.0/decorative.png" id="1_bfrfo"]
 [ext_resource type="Texture2D" uid="uid://ctdrremj712e7" path="res://RF_Catacombs_v1.0/mainlevbuild.png" id="2_t3smn"]
 [ext_resource type="Script" path="res://src/Level/PlayerCamera.gd" id="3_gyfkd"]
 [ext_resource type="Script" path="res://src/Level/ClonableTileMap.gd" id="3_hbw88"]
 [ext_resource type="Script" path="res://src/Level/LevelCanvasModulate.gd" id="4_r12pr"]
+[ext_resource type="Script" path="res://src/Level/Fog.gd" id="6_umkwq"]
+
+[sub_resource type="Gradient" id="Gradient_mujus"]
+offsets = PackedFloat32Array(0.0504202, 0.239496, 0.369748, 0.567227)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0.73913, 0, 0, 0, 0.184314)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ya1aa"]
+gradient = SubResource("Gradient_mujus")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_m6ayt"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hl0lc"]
+seamless = true
+noise = SubResource("FastNoiseLite_m6ayt")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_00g6v"]
+shader = ExtResource("1_1ktsl")
+shader_parameter/scroll1 = Vector2(0.03, 0.03)
+shader_parameter/scroll2 = Vector2(-0.03, -0.03)
+shader_parameter/positionOffset = Vector2(0, 0)
+shader_parameter/noise_tex2 = SubResource("NoiseTexture2D_hl0lc")
+shader_parameter/gradient_tex = SubResource("GradientTexture1D_ya1aa")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kcnhu"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wrhp0"]
+seamless = true
+noise = SubResource("FastNoiseLite_kcnhu")
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_6miig"]
 polygon = PackedVector2Array(-3, -3, 8, -3, 8, 8, -3, 8)
@@ -4028,6 +4057,15 @@ sources/2 = SubResource("TileSetAtlasSource_rmaek")
 
 [node name="DarkLevel" type="Node2D"]
 
+[node name="Fog" type="Sprite2D" parent="."]
+z_index = 4
+texture_repeat = 2
+material = SubResource("ShaderMaterial_00g6v")
+position = Vector2(351, 148)
+scale = Vector2(1.73047, 1.73047)
+texture = SubResource("NoiseTexture2D_wrhp0")
+script = ExtResource("6_umkwq")
+
 [node name="TileMap" type="TileMap" parent="."]
 z_as_relative = false
 y_sort_enabled = true
@@ -4063,7 +4101,7 @@ script = ExtResource("3_hbw88")
 
 [node name="PlayerCamera" type="Camera2D" parent="TileMap"]
 texture_filter = 1
-zoom = Vector2(2.5, 2.5)
+zoom = Vector2(2, 2)
 script = ExtResource("3_gyfkd")
 
 [node name="ColorRect" type="ColorRect" parent="TileMap/PlayerCamera"]
