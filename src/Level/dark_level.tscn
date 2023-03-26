@@ -15,23 +15,24 @@ colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0.73913, 0, 0, 0, 0.1
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_ya1aa"]
 gradient = SubResource("Gradient_mujus")
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_m6ayt"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_773mn"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hl0lc"]
 seamless = true
-noise = SubResource("FastNoiseLite_m6ayt")
+noise = SubResource("FastNoiseLite_773mn")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_00g6v"]
 shader = ExtResource("1_1ktsl")
-shader_parameter/scroll1 = Vector2(0.03, 0.03)
-shader_parameter/scroll2 = Vector2(-0.03, -0.03)
-shader_parameter/positionOffset = Vector2(0, 0)
+shader_parameter/scroll1 = Vector2(-0.03, -0.03)
+shader_parameter/scroll2 = Vector2(0.03, 0.03)
 shader_parameter/noise_tex2 = SubResource("NoiseTexture2D_hl0lc")
 shader_parameter/gradient_tex = SubResource("GradientTexture1D_ya1aa")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_kcnhu"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wrhp0"]
+width = 1024
+height = 1024
 seamless = true
 noise = SubResource("FastNoiseLite_kcnhu")
 
@@ -4061,8 +4062,8 @@ sources/2 = SubResource("TileSetAtlasSource_rmaek")
 z_index = 4
 texture_repeat = 2
 material = SubResource("ShaderMaterial_00g6v")
-position = Vector2(351, 148)
-scale = Vector2(1.73047, 1.73047)
+position = Vector2(475, 210)
+scale = Vector2(1.18945, 1.18945)
 texture = SubResource("NoiseTexture2D_wrhp0")
 script = ExtResource("6_umkwq")
 

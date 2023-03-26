@@ -8,11 +8,11 @@ const torch_scene = preload("res://src/Torch/torch.tscn")
 @onready var self_light = $PlayerLight
 @onready var torch_light = $Hand/Torch/TorchLight
 @onready var flashlight = $Hand/Flashlight
-@onready var sprite = $Sprite2D
 @onready var anim = $AnimationPlayer
 @onready var hand = $Hand
 @onready var pickup_area = $PickUpArea
 @onready var torch = $Hand/Torch
+@onready var spritesheet : PlayerSpriteSheet = $PlayerSpriteSheet
 
 var has_torch : bool
 var available_torch
@@ -27,6 +27,9 @@ func _ready():
 	set_has_torch(false)
 	
 	$PlayerCamera.target = self
+	
+	spritesheet.set_fps(6)
+	spritesheet.go_idle(velocity, false)
 
 
 func _physics_process(delta):
@@ -46,25 +49,30 @@ func _physics_process(delta):
 	
 	move_and_slide()
 	
+	spritesheet.set_y_coord(velocity, has_torch)
+	
 	if velocity.length() > 0.5:
 		if (velocity.x < -0.1):
 			flip_self(true)
 		elif (velocity.x > 0.1):
 			flip_self(false)
 		
-		
-		if not anim.current_animation == "walk" or anim.current_animation == "walk_torch":
-			anim.play("walk_torch" if has_torch else "walk")
+		if not spritesheet.is_walking():
+			spritesheet.do_walk_anim(velocity, has_torch)
 	else:
-		anim.play("idle_torch" if has_torch else "idle")
+		spritesheet.go_idle(velocity, has_torch)
 
 
 func flip_self(is_flipped: bool) -> void:
-	sprite.flip_h = is_flipped
-	if is_flipped:
-		hand.position.x = abs(hand.position.x) * -1.0
-	else:
+	if spritesheet.frame_coords.y >= 2:
+		spritesheet.flip_h = false
 		hand.position.x = abs(hand.position.x)
+	else:
+		spritesheet.flip_h = is_flipped
+		if is_flipped:
+			hand.position.x = abs(hand.position.x) * -1.0
+		else:
+			hand.position.x = abs(hand.position.x)
 
 
 func _process(delta):
@@ -117,13 +125,6 @@ func set_has_torch(value : bool) -> void:
 	has_torch = value
 	torch.visible = value
 	torch_light.visible = value
-	if anim.is_playing():
-		var pos = anim.current_animation_position
-		if anim.current_animation == "walk":
-			anim.play("walk_torch")
-		elif anim.current_animation == "idle":
-			anim.play("idle_torch")
-		anim.seek(pos)
 
 
 func on_pickup_area_exited(area) -> void:

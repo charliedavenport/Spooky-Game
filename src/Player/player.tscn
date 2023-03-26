@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://caw2ba1o3nlf3"]
+[gd_scene load_steps=19 format=3 uid="uid://caw2ba1o3nlf3"]
 
 [ext_resource type="Script" path="res://src/Player/player.gd" id="1_s23x1"]
-[ext_resource type="Texture2D" uid="uid://bioxyh4bmxacc" path="res://Krita/Spritesheet.png" id="2_ncdi2"]
+[ext_resource type="Texture2D" uid="uid://8ld342s2gtsg" path="res://sprites/2D_character_3_dir.png" id="2_xwh2p"]
+[ext_resource type="Script" path="res://src/Player/PlayerSpriteSheet.gd" id="3_qpl8u"]
 [ext_resource type="Texture2D" uid="uid://3bco4if2l2cc" path="res://sprites/fire_spritesheet_color.png" id="4_esdc1"]
 [ext_resource type="Texture2D" uid="uid://xgto5bed82s3" path="res://src/Torch/torch_light_gradient.tres" id="5_lb4ke"]
 [ext_resource type="Texture2D" uid="uid://divwmgmm6sj22" path="res://sprites/spotlight.png" id="6_v2l8l"]
@@ -11,7 +12,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("PlayerSpriteSheet:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -22,11 +23,11 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_xtqe3"]
-resource_name = "idle"
+resource_name = "idle_right"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("PlayerSpriteSheet:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -49,11 +50,11 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_eprat"]
-resource_name = "idle_torch"
+resource_name = "idle_right_torch"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("PlayerSpriteSheet:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -76,14 +77,14 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_gwsbx"]
-resource_name = "walk"
+resource_name = "walk_right"
 length = 1.33335
 loop_mode = 1
 step = 0.166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("PlayerSpriteSheet:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -106,14 +107,14 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_ss1l5"]
-resource_name = "walk_torch"
+resource_name = "walk_right_torch"
 length = 1.33335
 loop_mode = 1
 step = 0.166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("PlayerSpriteSheet:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -138,10 +139,10 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uyrqi"]
 _data = {
 "RESET": SubResource("Animation_kmuj2"),
-"idle": SubResource("Animation_xtqe3"),
-"idle_torch": SubResource("Animation_eprat"),
-"walk": SubResource("Animation_gwsbx"),
-"walk_torch": SubResource("Animation_ss1l5")
+"idle_right": SubResource("Animation_xtqe3"),
+"idle_right_torch": SubResource("Animation_eprat"),
+"walk_right": SubResource("Animation_gwsbx"),
+"walk_right_torch": SubResource("Animation_ss1l5")
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7iwev"]
@@ -200,18 +201,21 @@ y_sort_enabled = true
 collision_layer = 2
 script = ExtResource("1_s23x1")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="PlayerSpriteSheet" type="Sprite2D" parent="."]
 y_sort_enabled = true
 position = Vector2(0, -18)
 scale = Vector2(0.258734, 0.258734)
-texture = ExtResource("2_ncdi2")
+texture = ExtResource("2_xwh2p")
 offset = Vector2(0, -28)
 hframes = 9
-vframes = 2
+vframes = 6
 frame = 2
+script = ExtResource("3_qpl8u")
+
+[node name="AnimTimer" type="Timer" parent="PlayerSpriteSheet"]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "idle"
+autoplay = "idle_right"
 libraries = {
 "": SubResource("AnimationLibrary_uyrqi")
 }
