@@ -8,7 +8,6 @@ var curr_state : State
 
 func _ready():
 	$AnimTimer.timeout.connect(on_anim_timeout)
-	print(Vector2.LEFT.angle())
 
 func set_fps(frames_per_second : int) -> void:
 	var interval = 1.0 / float(frames_per_second)
@@ -20,16 +19,18 @@ func is_walking() -> bool:
 func is_idle() -> bool:
 	return curr_state == State.IDLE
 
-func go_idle(vel, has_torch) -> void:
+func go_idle(vel = null, has_torch = null) -> void:
 	set_state(State.IDLE)
 	frame_coords.x = 0
-	set_y_coord(vel, has_torch)
+	if vel != null and has_torch != null: 
+		set_y_coord(vel, has_torch)
+	else:
+		set_y_coord(Vector2.RIGHT, false)
 
-func do_walk_anim(vel, has_torch) -> void:
+func do_walk_anim() -> void:
 	set_state(State.WALK)
 	frame_coords.x = 1
 	$AnimTimer.start()
-	set_y_coord(vel, has_torch)
 
 func on_anim_timeout() -> void:
 	if curr_state != State.WALK:

@@ -14,6 +14,7 @@ extends Node2D
 
 func _ready():
 	player.torch_dropped.connect(on_torch_dropped)
+	player.toggle_true_sight.connect(vis_mask.toggle_true_sight)
 	
 	#player_cam.target = player
 	$VisibilityViewport/TileMap_VisMask/PlayerCamera.target = player
@@ -27,6 +28,9 @@ func _ready():
 	# clone the lit tilemap onto the other tilemaps
 	for clone_target in clone_tilemaps:
 		clone_tilemap(source_tilemap, clone_target)
+	
+	for enemy in $LitViewport/LitLevel/TileMap/Enemies.get_children():
+		enemy.player_target = player
 
 
 func clone_tilemap(source: TileMap, target: TileMap) -> void:

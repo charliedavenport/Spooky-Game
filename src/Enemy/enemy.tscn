@@ -1,19 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://c54pvbcbb7wiv"]
+[gd_scene load_steps=5 format=3 uid="uid://c54pvbcbb7wiv"]
 
 [ext_resource type="Script" path="res://src/Enemy/enemy.gd" id="1_m10w3"]
-[ext_resource type="Texture2D" uid="uid://ctfwgx0ts0d6d" path="res://icon.svg" id="2_746aa"]
-[ext_resource type="Shader" path="res://src/Enemy/Enemy.gdshader" id="2_cftsd"]
+[ext_resource type="Texture2D" uid="uid://8ld342s2gtsg" path="res://sprites/2D_character_3_dir.png" id="4_jaixg"]
+[ext_resource type="Script" path="res://src/Player/PlayerSpriteSheet.gd" id="5_kmfa8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_35q5k"]
 radius = 6.99999
-height = 34.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_afybn"]
-shader = ExtResource("2_cftsd")
+height = 18.0
 
 [node name="Enemy" type="CharacterBody2D"]
-collision_layer = 0
-collision_mask = 0
+z_index = 1
+z_as_relative = false
+y_sort_enabled = true
+collision_layer = 8
+collision_mask = 11
 script = ExtResource("1_m10w3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -22,8 +22,29 @@ position = Vector2(0, -7)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_35q5k")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_afybn")
-position = Vector2(1.19209e-07, -22)
-scale = Vector2(0.343129, 0.343129)
-texture = ExtResource("2_746aa")
+[node name="PlayerSpriteSheet" type="Sprite2D" parent="."]
+modulate = Color(0.941176, 0.227451, 0.227451, 1)
+y_sort_enabled = true
+position = Vector2(0, -18)
+scale = Vector2(0.258734, 0.258734)
+texture = ExtResource("4_jaixg")
+offset = Vector2(0, -28)
+hframes = 9
+vframes = 6
+frame = 2
+script = ExtResource("5_kmfa8")
+
+[node name="AnimTimer" type="Timer" parent="PlayerSpriteSheet"]
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(0, -25)
+collision_mask = 17
+collide_with_areas = true
+
+[node name="Line2D" type="Line2D" parent="."]
+visible = false
+points = PackedVector2Array(0, -25, 0, 50)
+width = 1.0
+default_color = Color(1, 0, 0, 1)
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

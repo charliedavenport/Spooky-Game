@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://caw2ba1o3nlf3"]
+[gd_scene load_steps=20 format=3 uid="uid://caw2ba1o3nlf3"]
 
 [ext_resource type="Script" path="res://src/Player/player.gd" id="1_s23x1"]
 [ext_resource type="Texture2D" uid="uid://8ld342s2gtsg" path="res://sprites/2D_character_3_dir.png" id="2_xwh2p"]
@@ -147,7 +147,7 @@ _data = {
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7iwev"]
 radius = 6.99999
-height = 34.0
+height = 24.0
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_r0jap"]
 light_mode = 1
@@ -193,6 +193,9 @@ _data = {
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3ft3c"]
 radius = 32.0624
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ajg61"]
+height = 50.0
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
@@ -285,3 +288,10 @@ monitorable = false
 position = Vector2(0, -22)
 shape = SubResource("CircleShape2D_3ft3c")
 debug_color = Color(0, 0.701961, 0.466667, 0.0705882)
+
+[node name="RaycastTarget" type="Area2D" parent="."]
+position = Vector2(0, -25)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RaycastTarget"]
+shape = SubResource("CapsuleShape2D_ajg61")
+debug_color = Color(0.701961, 0, 0.0117647, 0.419608)

@@ -13,11 +13,13 @@ const torch_scene = preload("res://src/Torch/torch.tscn")
 @onready var pickup_area = $PickUpArea
 @onready var torch = $Hand/Torch
 @onready var spritesheet : PlayerSpriteSheet = $PlayerSpriteSheet
+@onready var raycast_target : Node2D = $RaycastTarget
 
 var has_torch : bool
 var available_torch
 
 signal torch_dropped(torch)
+signal toggle_true_sight()
 
 func _ready():
 	self_light.show()
@@ -29,7 +31,7 @@ func _ready():
 	$PlayerCamera.target = self
 	
 	spritesheet.set_fps(6)
-	spritesheet.go_idle(velocity, false)
+	spritesheet.go_idle()
 
 
 func _physics_process(delta):
@@ -58,7 +60,7 @@ func _physics_process(delta):
 			flip_self(false)
 		
 		if not spritesheet.is_walking():
-			spritesheet.do_walk_anim(velocity, has_torch)
+			spritesheet.do_walk_anim()
 	else:
 		spritesheet.go_idle(velocity, has_torch)
 
@@ -91,6 +93,9 @@ func _input(event):
 			available_torch = null
 		elif has_torch:
 			drop_torch()
+	
+	if event.is_action_pressed("toggle_true_sight"):
+		toggle_true_sight.emit()
 
 
 func on_pickup_area_entered(area) -> void:
