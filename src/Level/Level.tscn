@@ -55,7 +55,6 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="VisDebug" type="Sprite2D" parent="PlayerCamera"]
-visible = false
 z_index = 7
 material = SubResource("CanvasItemMaterial_614um")
 position = Vector2(-471.253, -258.642)
@@ -63,7 +62,6 @@ scale = Vector2(0.152338, 0.152338)
 texture = SubResource("ViewportTexture_t32ua")
 
 [node name="LitDebug" type="Sprite2D" parent="PlayerCamera"]
-visible = false
 z_index = 7
 material = SubResource("CanvasItemMaterial_614um")
 position = Vector2(-470.253, -153.642)

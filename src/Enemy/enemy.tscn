@@ -48,3 +48,4 @@ width = 1.0
 default_color = Color(1, 0, 0, 1)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
