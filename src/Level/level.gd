@@ -14,7 +14,10 @@ extends Node2D
 
 func _ready():
 	player.torch_dropped.connect(on_torch_dropped)
-	player.toggle_true_sight.connect(vis_mask.toggle_true_sight)
+	#player.toggle_debug.connect(vis_mask.toggle_true_sight)
+	player.toggle_debug.connect(self.toggle_debug)
+	
+	$PlayerCamera/VisDebug.hide()
 	
 	#player_cam.target = player
 	$VisibilityViewport/TileMap_VisMask/PlayerCamera.target = player
@@ -30,10 +33,12 @@ func _ready():
 		clone_tilemap(source_tilemap, clone_target)
 	
 	for enemy in $LitViewport/LitLevel/TileMap/Enemies.get_children():
-		enemy.player_target = player
+		enemy.set_player_target(player)
+		player.toggle_debug.connect(enemy.toggle_debug)
 
 
 func clone_tilemap(source: TileMap, target: TileMap) -> void:
+	target.clear()
 	for layer_ind in range(source.get_layers_count()):
 		var source_tiles = source.get_used_cells(layer_ind)
 		for tile_coord in source_tiles:
@@ -50,3 +55,8 @@ func _input(event):
 func on_torch_dropped(torch: Torch) -> void:
 	torches.add_child(torch)
 	vis_mask.add_visibility_light(torch.get_node("TorchLight"))
+
+func toggle_debug() -> void:
+	var is_true_sight = $LitView.material.get_shader_parameter("true_sight")
+	$LitView.material.set_shader_parameter("true_sight", not is_true_sight)
+	$PlayerCamera/VisDebug.visible = not $PlayerCamera/VisDebug.visible

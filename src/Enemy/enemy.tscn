@@ -6,7 +6,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_35q5k"]
 radius = 6.99999
-height = 18.0
+height = 16.0
 
 [node name="Enemy" type="CharacterBody2D"]
 z_index = 1
@@ -36,16 +36,43 @@ script = ExtResource("5_kmfa8")
 
 [node name="AnimTimer" type="Timer" parent="PlayerSpriteSheet"]
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(0, -25)
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="Raycasts" type="Node2D" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="Raycasts"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(0, -48)
 collision_mask = 17
 collide_with_areas = true
 
-[node name="Line2D" type="Line2D" parent="."]
-visible = false
-points = PackedVector2Array(0, -25, 0, 50)
+[node name="RayCast2D2" type="RayCast2D" parent="Raycasts"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(0, -24)
+collision_mask = 17
+collide_with_areas = true
+
+[node name="RayCast2D3" type="RayCast2D" parent="Raycasts"]
+modulate = Color(1, 1, 1, 0)
+collision_mask = 17
+collide_with_areas = true
+
+[node name="Lines" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0.427451)
+
+[node name="Line2D" type="Line2D" parent="Lines"]
+position = Vector2(0, -48)
+points = PackedVector2Array(0, 0, 50, 0)
 width = 1.0
 default_color = Color(1, 0, 0, 1)
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-debug_enabled = true
+[node name="Line2D2" type="Line2D" parent="Lines"]
+position = Vector2(0, -24)
+points = PackedVector2Array(0, 0, 50, 0)
+width = 1.0
+default_color = Color(1, 0, 0, 1)
+
+[node name="Line2D3" type="Line2D" parent="Lines"]
+points = PackedVector2Array(0, 0, 50, 0)
+width = 1.0
+default_color = Color(1, 0, 0, 1)

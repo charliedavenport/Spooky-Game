@@ -22,6 +22,7 @@ viewport_path = NodePath("VisibilityViewport")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wvyg5"]
 resource_local_to_scene = true
 shader = ExtResource("2_uk585")
+shader_parameter/true_sight = false
 shader_parameter/mask_texture = SubResource("ViewportTexture_mclae")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_2pjf6"]
@@ -55,6 +56,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="VisDebug" type="Sprite2D" parent="PlayerCamera"]
+visible = false
 z_index = 7
 material = SubResource("CanvasItemMaterial_614um")
 position = Vector2(-471.253, -258.642)
@@ -62,6 +64,7 @@ scale = Vector2(0.152338, 0.152338)
 texture = SubResource("ViewportTexture_t32ua")
 
 [node name="LitDebug" type="Sprite2D" parent="PlayerCamera"]
+visible = false
 z_index = 7
 material = SubResource("CanvasItemMaterial_614um")
 position = Vector2(-470.253, -153.642)

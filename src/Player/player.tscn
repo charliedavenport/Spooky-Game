@@ -147,7 +147,7 @@ _data = {
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7iwev"]
 radius = 6.99999
-height = 24.0
+height = 22.0
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_r0jap"]
 light_mode = 1
@@ -295,3 +295,12 @@ position = Vector2(0, -25)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RaycastTarget"]
 shape = SubResource("CapsuleShape2D_ajg61")
 debug_color = Color(0.701961, 0, 0.0117647, 0.419608)
+
+[node name="Target_01" type="Node2D" parent="RaycastTarget"]
+position = Vector2(0, -23)
+
+[node name="Target_02" type="Node2D" parent="RaycastTarget"]
+position = Vector2(0, 1)
+
+[node name="Target_03" type="Node2D" parent="RaycastTarget"]
+position = Vector2(0, 25)

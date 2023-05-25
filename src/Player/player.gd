@@ -19,7 +19,7 @@ var has_torch : bool
 var available_torch
 
 signal torch_dropped(torch)
-signal toggle_true_sight()
+signal toggle_debug()
 
 func _ready():
 	self_light.show()
@@ -94,8 +94,8 @@ func _input(event):
 		elif has_torch:
 			drop_torch()
 	
-	if event.is_action_pressed("toggle_true_sight"):
-		toggle_true_sight.emit()
+	if event.is_action_pressed("toggle_debug"):
+		toggle_debug.emit()
 
 
 func on_pickup_area_entered(area) -> void:
@@ -142,3 +142,10 @@ func on_pickup_area_exited(area) -> void:
 	available_torch.hide_label()
 	available_torch = null
 
+func get_raycast_targets() -> Array[Node2D]:
+	return [
+		$RaycastTarget/Target_01 as Node2D,
+		$RaycastTarget/Target_02 as Node2D,
+		$RaycastTarget/Target_03 as Node2D
+	]
+	
