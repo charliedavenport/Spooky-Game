@@ -4113,6 +4113,9 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
+[node name="AudioListener2D" type="AudioListener2D" parent="TileMap/Player"]
+current = true
+
 [node name="Torches" type="Node2D" parent="TileMap"]
 z_as_relative = false
 y_sort_enabled = true

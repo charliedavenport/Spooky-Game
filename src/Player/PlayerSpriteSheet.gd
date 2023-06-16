@@ -36,6 +36,8 @@ func on_anim_timeout() -> void:
 	if curr_state != State.WALK:
 		return
 	frame_coords.x = wrapi(frame_coords.x + 1, 1, hframes)
+	if frame_coords.x == 1 or frame_coords.x == 5:
+		$FootstepAudio.play()
 
 func set_state(value : State) -> void:
 	match curr_state:

@@ -14,6 +14,7 @@ const torch_scene = preload("res://src/Torch/torch.tscn")
 @onready var torch = $Hand/Torch
 @onready var spritesheet : PlayerSpriteSheet = $PlayerSpriteSheet
 @onready var raycast_target : Node2D = $RaycastTarget
+@onready var anim_tree : AnimationTree = $MixamoSpriteSheet/AnimationTree
 
 var has_torch : bool
 var available_torch
@@ -53,19 +54,29 @@ func _physics_process(delta):
 	
 	spritesheet.set_y_coord(velocity, has_torch)
 	
+	if new_vel != Vector2.ZERO:
+		var anim_vec = Vector2(abs(velocity.x), velocity.y)
+		anim_tree.set("parameters/idle/blend_position", anim_vec)
+		anim_tree.set("parameters/walk/blend_position", anim_vec)
+		anim_tree.set("parameters/walkTorch/blend_position", anim_vec)
+	
 	if velocity.length() > 0.5:
 		if (velocity.x < -0.1):
 			flip_self(true)
 		elif (velocity.x > 0.1):
 			flip_self(false)
 		
+		anim_tree.get("parameters/playback").travel("walkTorch" if has_torch else "walk")
 		if not spritesheet.is_walking():
 			spritesheet.do_walk_anim()
 	else:
+		anim_tree.get("parameters/playback").travel("idle")
 		spritesheet.go_idle(velocity, has_torch)
 
 
 func flip_self(is_flipped: bool) -> void:
+	$MixamoSpriteSheet.flip_h = is_flipped
+	
 	if spritesheet.frame_coords.y >= 2:
 		spritesheet.flip_h = false
 		hand.position.x = abs(hand.position.x)

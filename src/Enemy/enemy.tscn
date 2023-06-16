@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://c54pvbcbb7wiv"]
+[gd_scene load_steps=6 format=3 uid="uid://c54pvbcbb7wiv"]
 
 [ext_resource type="Script" path="res://src/Enemy/enemy.gd" id="1_m10w3"]
+[ext_resource type="AudioStream" uid="uid://dulkjghl5gv6t" path="res://sound/foot tile reverb.mp3" id="4_i6v65"]
 [ext_resource type="Texture2D" uid="uid://8ld342s2gtsg" path="res://sprites/2D_character_3_dir.png" id="4_jaixg"]
 [ext_resource type="Script" path="res://src/Player/PlayerSpriteSheet.gd" id="5_kmfa8"]
 
@@ -35,6 +36,10 @@ frame = 2
 script = ExtResource("5_kmfa8")
 
 [node name="AnimTimer" type="Timer" parent="PlayerSpriteSheet"]
+
+[node name="FootstepAudio" type="AudioStreamPlayer2D" parent="PlayerSpriteSheet"]
+stream = ExtResource("4_i6v65")
+volume_db = -20.0
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 

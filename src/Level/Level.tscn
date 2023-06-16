@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b7ym7kj6lmfkd"]
+[gd_scene load_steps=15 format=3 uid="uid://b7ym7kj6lmfkd"]
 
 [ext_resource type="Script" path="res://src/Level/level.gd" id="1_6yqe5"]
 [ext_resource type="Script" path="res://src/Level/PlayerCamera.gd" id="2_l25bb"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://du745qvyq4g2m" path="res://src/Level/lit_level.tscn" id="4_3gto1"]
 [ext_resource type="PackedScene" uid="uid://br6tg1skeqkm2" path="res://src/VisibilityMask/tile_map_vis_mask.tscn" id="5_i53mb"]
 [ext_resource type="PackedScene" uid="uid://dkndvy4y4gs8t" path="res://src/Level/dark_level.tscn" id="6_i7ocf"]
+[ext_resource type="AudioStream" uid="uid://bquyi5aw4ibot" path="res://sound/yewbic-ambiences/31904__yewbic__ambience01.wav" id="7_w7alf"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_614um"]
 light_mode = 1
@@ -86,6 +87,7 @@ centered = false
 [node name="LitViewport" type="SubViewport" parent="."]
 transparent_bg = true
 handle_input_locally = false
+audio_listener_enable_2d = true
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
@@ -102,3 +104,8 @@ render_target_update_mode = 4
 size = Vector2i(1152, 648)
 
 [node name="DarkLevel" parent="DarkLevelViewport" instance=ExtResource("6_i7ocf")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_w7alf")
+volume_db = -15.0
+autoplay = true
